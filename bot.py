@@ -91,8 +91,7 @@ def upload_to_facebook():
             'video_state': 'PUBLISHED',
             'description': 'Automated Daily Movie Short Reel #shorts #viral',
             'video_id': video_id,
-            'access_token': EAAQcE9ZBE5XcBS6HRFwmBle5RhzSAmAwZA49ZAevdXm72zeqD3ldiKpbB4ZBu0FvnTZCiCRsWRINlwj2lI74NU3RxatTr9VNaCnx0bs1esSqZAlZAZCU35zFr1dV5APJxm5ofQwbZBIufeoeTt2c3vShX5Agiv32ScZAO2zgsiXgVc45TfWAEjFvVuHuqWTrgUXWzdkmZCA
-        }
+            'access_token': FACEBOOK_ACCESS_TOKEN
         
         publish_response = requests.post(publish_url, data=publish_payload).json()
         print(f"Publish Response: {publish_response}")
