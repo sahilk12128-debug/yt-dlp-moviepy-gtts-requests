@@ -1,0 +1,35 @@
+name: Daily Movie Shorts Auto Upload
+
+on:
+  schedule:
+    # ⏰ यह टाइमर रोज़ दोपहर 2:30 बजे (भारतीय समयानुसार) अपने आप इस सॉफ्टवेयर को चालू करेगा
+    - cron: '30 9 * * *'
+  workflow_dispatch: # इससे आप जब चाहें खुद भी बटन दबाकर इसे तुरंत चला सकते हैं
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Install System Dependencies (FFmpeg)
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ffmpeg
+
+    - name: Install Python Tools
+      run: |
+        pip install requests yt-dlp
+
+    - name: Run Auto Reels Bot
+      env:
+        FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+        FB_ACCESS_TOKEN: ${{ secrets.FB_ACCESS_TOKEN }}
+      run: python bot.py
